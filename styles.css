@@ -2,3 +2,11 @@ div{
     margin:100px,20px;
     color:aquamarine;
 }
+#themeButton{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    width: 75px;
+    height: 75px;
+
+}
