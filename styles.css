@@ -1,6 +1,31 @@
-div{
-    margin:100px,20px;
-    color:aquamarine;
+html {
+    height: 100%;
+}
+
+[data-title] {
+    position: relative; /* Относительное позиционирование */ 
+    cursor: help; /* Меняем курсор на справочный */
+}
+[data-title]::after {
+    content: attr(data-title); /* Выводим текст из атрибута data-title */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 10px; top: 40px; /* Подсказка снизу */
+    opacity: 0;
+    font-size: 15px;
+    transition: 2.5s;
+    pointer-events: none; /* Подсказка не реагирует на курсор */
+}
+[data-title]:hover::after {
+    opacity: 1; /* Показываем подсказку */
+    transition: 8s;
+}
+
+
+h1 {
+    position: relative;
+    transition: all 0.6s ease-in-out;
+    left:42%;
+    width: 155px;
 }
 #themeButton{
     position: absolute;
@@ -10,7 +35,3 @@ div{
     height: 75px;
 
 }
-html {
-    height: 100%;
-}
-  
