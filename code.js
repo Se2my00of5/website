@@ -10,7 +10,7 @@ themeButton.onclick = () => { //обработка смены темы по на
         // перевод на тёмную тему
         themeButton.src=themeButton.src.replace("sun","moon");
        // display.style.backgroundColor="black";
-        display.style.background = "linear-gradient(0deg, #000000 25%, #191D29 75%)";
+        display.style.background = "linear-gradient(225deg,rgb(41,51,66)9%,rgb(21,31,45)17%,rgb(0,0,0))";
 
     }
     else{
