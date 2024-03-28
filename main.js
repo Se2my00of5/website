@@ -1,8 +1,8 @@
 const themeButton = document.querySelector("#themeButton")
 const display = document.body
 
-console.dir(themeButton)
-console.dir(display)
+const canvas = document.querySelector("#myCanvas")
+const pole = canvas.getContext("2d")
 
 themeButton.onclick = () => { //обработка смены темы по нажатию
     if (themeButton.src.indexOf("sun") != -1) {
@@ -11,17 +11,18 @@ themeButton.onclick = () => { //обработка смены темы по на
         // display.style.backgroundColor="black";
         display.style.background = "linear-gradient(225deg,rgb(41,51,66)9%,rgb(21,31,45)17%,rgb(0,0,0))";
         display.style.color = "white";
+        //canvas.style.background = "#62544E"
 
     } else {
         // перевод на светлую
         themeButton.src = themeButton.src.replace("moon", "sun");
         display.style.background = "white";
         display.style.color = "black";
+       // canvas.style.background = "#F8EAD9"
     }
 };
 
-const canvas = document.querySelector("#myCanvas")
-const pole = canvas.getContext("2d")
+
 
 //квадратик
 pole.beginPath();
@@ -51,34 +52,51 @@ pole.moveTo(0, 50)
 pole.lineTo(canvas.width, 50)
 pole.stroke()
 
-canvas.onmouseup = (event) => {
-    const x = event.offsetX;
-    const y = event.offsetY;
+// закрытие canvas
+var flag = false; // 0 - неактив, 1-6 - запущена игрулька
+canvas.addEventListener("mouseup",function(event){
+    let x = event.offsetX;
+    let y = event.offsetY;
+    
     if (x >= canvas.width - 40 && x <= canvas.width - 10 && y >= 10 && y <= 40) {
         canvas.style.opacity = "0";
-        pole.clearRect(0, 51, canvas.width, 51)
+        pole.clearRect(0, 51, canvas.width, canvas.height);
+        pole.clearRect(0, 0, canvas.width - 42, 48);
+        flag=false;
     }
-}
+})
 
 
 const games = document.querySelectorAll("li")
 
 
 games[0].onclick = () => {
-    canvas.style.opacity = "1";
-}
-games[1].onclick = () => {
-    canvas.style.opacity = "1";
+    if(flag==0){
+        flag=1
+        canvas.style.opacity = "1";
+    }
 }
 games[2].onclick = () => {
-    canvas.style.opacity = "1";
+    if(flag==0){
+        flag=3
+        canvas.style.opacity = "1";
+    }
 }
 games[3].onclick = () => {
-    canvas.style.opacity = "1";
+    if(flag==0){
+        flag=4
+        canvas.style.opacity = "1";
+    }
 }
 games[4].onclick = () => {
-    canvas.style.opacity = "1";
+    if(flag==0){
+        flag=5
+        canvas.style.opacity = "1";
+    }
 }
 games[5].onclick = () => {
-    canvas.style.opacity = "1";
+    if(flag==0){
+        flag=6
+        canvas.style.opacity = "1";
+    }
 }
