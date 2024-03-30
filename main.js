@@ -18,7 +18,7 @@ themeButton.onclick = () => { //обработка смены темы по на
         themeButton.src = themeButton.src.replace("moon", "sun");
         display.style.background = "white";
         display.style.color = "black";
-       // canvas.style.background = "#F8EAD9"
+        // canvas.style.background = "#F8EAD9"
     }
 };
 
@@ -54,15 +54,17 @@ pole.stroke()
 
 // закрытие canvas
 var flag = false; // 0 - неактив, 1-6 - запущена игрулька
-canvas.addEventListener("mouseup",function(event){
+canvas.addEventListener("mouseup", function (event) {
     let x = event.offsetX;
     let y = event.offsetY;
-    
+
     if (x >= canvas.width - 40 && x <= canvas.width - 10 && y >= 10 && y <= 40) {
+        if(flag==2) CloseKlasters()//костыль для закрытия игры-кластеров
+        
         canvas.style.opacity = "0";
         pole.clearRect(0, 51, canvas.width, canvas.height);
         pole.clearRect(0, 0, canvas.width - 42, 48);
-        flag=false;
+        flag = false;
     }
 })
 
@@ -71,32 +73,32 @@ const games = document.querySelectorAll("li")
 
 
 games[0].onclick = () => {
-    if(flag==0){
-        flag=1
+    if (flag == 0) {
+        flag = 1
         canvas.style.opacity = "1";
     }
 }
 games[2].onclick = () => {
-    if(flag==0){
-        flag=3
+    if (flag == 0) {
+        flag = 3
         canvas.style.opacity = "1";
     }
 }
 games[3].onclick = () => {
-    if(flag==0){
-        flag=4
+    if (flag == 0) {
+        flag = 4
         canvas.style.opacity = "1";
     }
 }
 games[4].onclick = () => {
-    if(flag==0){
-        flag=5
+    if (flag == 0) {
+        flag = 5
         canvas.style.opacity = "1";
     }
 }
 games[5].onclick = () => {
-    if(flag==0){
-        flag=6
+    if (flag == 0) {
+        flag = 6
         canvas.style.opacity = "1";
     }
 }
