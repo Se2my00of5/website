@@ -26,6 +26,12 @@ const button_QualKlasters_LeftTopY = 190
 const button_QualKlasters_RightLowerX = canvas.width - 30
 const button_QualKlasters_RightLowerY = 240
 
+// корды кнопки готово
+const button_Complete_LeftTopX = canvas.width - 180
+const button_Complete_LeftTopY = 190
+const button_Complete_RightLowerX = canvas.width - 30
+const button_Complete_RightLowerY = 270
+
 // корды background
 const leftTopX = 40
 const leftTopY = 85
@@ -36,13 +42,11 @@ const rightLowerY = 760
 
 // функции создания объектов/кнопок
 
-function paintPoint(x,y){
+function paintPoint(x,y, color = "white"){
     pole.beginPath()
-    pole.fillStyle = "white"
+    pole.fillStyle = color
     pole.arc(x, y, 4, 0, 2 * Math.PI)
     pole.fill();
-
-    Points[Points.lenght] = Node(x,y);
 }
 
 function addGameName(){
@@ -148,6 +152,11 @@ function addButtonRandom(){
 //кнопка выбора количества кластеров
 function addButtonChooseQualKlasters(){
     pole.beginPath()
+    pole.clearRect(button_Complete_LeftTopX-2,
+        button_Complete_LeftTopY-2,
+        button_Complete_RightLowerX - button_Complete_LeftTopX+4,
+        button_Complete_RightLowerY - button_Complete_LeftTopY+4);
+
     pole.rect(button_QualKlasters_LeftTopX,
     button_QualKlasters_LeftTopY,
     button_QualKlasters_RightLowerX - button_QualKlasters_LeftTopX,
@@ -198,6 +207,35 @@ function addButtonChooseQualKlasters(){
 
 }
 
+//кнопка готово
+function addButtonComplete(){
+    pole.beginPath()
+    pole.rect(button_Complete_LeftTopX,button_Complete_LeftTopY,
+        button_Complete_RightLowerX-button_Complete_LeftTopX,
+        button_Complete_RightLowerY-button_Complete_LeftTopY);
+    
+    pole.fillStyle = "white"
+    pole.strokeStyle = "black"
+    pole.fill();
+    pole.stroke();
+
+    pole.beginPath()
+    pole.rect(button_Complete_LeftTopX,button_Complete_RightLowerY-42,
+        button_Complete_RightLowerX-button_Complete_LeftTopX,
+        42)
+
+    pole.fillStyle = "red"
+    pole.fill();
+    pole.stroke();
+
+    pole.fillStyle = "#3F172C"
+    pole.font = "35px Trattatello, fantasy"
+    pole.fillText("_готово_", button_Complete_LeftTopX+6, button_Complete_LeftTopY+29)
+    pole.font = "25px Trattatello, fantasy"
+    pole.fillText("назад", button_Complete_LeftTopX+38, button_Complete_LeftTopY+67)
+    
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 //bool функции активации 
@@ -210,21 +248,21 @@ function boolReset(){
 }
 
 function boolAddPoint(){
-    if(boolChooseQualKlusters==false && leftTopX + 4 < x && x < rightLowerX - 4 && leftTopY + 4 < y && y < rightLowerY - 4)
+    if(boolChooseQualKlusters==0 && leftTopX + 4 < x && x < rightLowerX - 4 && leftTopY + 4 < y && y < rightLowerY - 4)
         return true
     return false
 }
 
 function boolRandom(){
-    if(boolChooseQualKlusters==false &&
+    if(boolChooseQualKlusters==0 &&
         button_QualPoints_LeftTopX + 102 < x && x < button_QualPoints_LeftTopX + 149 &&
         button_QualPoints_LeftTopY + 26 < y && y < button_QualPoints_RightLowerY -1 &&
-        checkInput()==true) return true
+        checkInput(inputQualPoints.value)==true) return true
     return false
 }
 
 function boolStartKlasterization(){
-    if(boolChooseQualKlusters==false && 
+    if(boolChooseQualKlusters==0 && 
         button_FindKlasters_LeftTopX + 2 < x && x < button_FindKlasters_RightLowerX - 2 && 
         button_FindKlasters_LeftTopY + 2 < y && y < button_FindKlasters_RightLowerY - 2)
             return true
@@ -232,7 +270,7 @@ function boolStartKlasterization(){
 }
 
 function boolCancelChooseQualKlasters(){
-    if(boolChooseQualKlusters==true &&
+    if(boolChooseQualKlusters==1 &&
         button_QualKlasters_LeftTopX+2< x && x <button_QualKlasters_LeftTopX+43 &&
         button_QualKlasters_LeftTopY+22 < y && y <button_QualKlasters_LeftTopY+48)
         return true
@@ -240,10 +278,18 @@ function boolCancelChooseQualKlasters(){
 }
 
 function boolSearchKlasters(){
-    if(boolChooseQualKlusters==true &&
-        button_QualKlasters_LeftTopX+107< x && x <button_QualKlasters_LeftTopX+43 &&
-        button_QualKlasters_LeftTopY+158 < y && y <button_QualKlasters_LeftTopY+48)
+    if(boolChooseQualKlusters==1 && checkInputQualKlaters(inputQualKlasters.value)==true &&
+        button_QualKlasters_LeftTopX + 107 < x && x < button_QualKlasters_LeftTopX+150 &&
+        button_QualKlasters_LeftTopY + 21 < y && y < button_QualKlasters_LeftTopY+49)
         return true
+    return false
+}
+
+function boolBackToChooseQualKlasters(){
+    if(boolChooseQualKlusters==2 &&
+       button_Complete_LeftTopX+2 < x && x <button_Complete_RightLowerX-2 &&
+       button_Complete_RightLowerY-40 < y && y <button_Complete_RightLowerY-2)
+       return true
     return false
 }
 
@@ -260,6 +306,7 @@ function narandomiti(){
             let randomY = getRandomInt(rightLowerY-leftTopY-4)+leftTopY+2;
             
             paintPoint(randomX,randomY)
+            Points[Points.length] = Node(randomX,randomY)
         }
     }
 }
@@ -267,7 +314,7 @@ function narandomiti(){
 function resetGame(){
     if(boolReset()==true){
         Points = []
-        boolChooseQualKlusters=false
+        boolChooseQualKlusters=0
         inputQualPoints.remove()
         inputQualKlasters.remove()
         addBackground()
@@ -279,23 +326,50 @@ function resetGame(){
 function addPoint(){
     if (boolAddPoint()==true) {
         paintPoint(x,y)
+        Points[Points.length] = Node(x,y)
     }
 }
 
 function transferToChooseQualKlasters(){
     if(boolStartKlasterization()==true){   
-        boolChooseQualKlusters = true
+        boolChooseQualKlusters = 1
         addButtonChooseQualKlasters()
     }
 }
 
 function CancelChooseQualKlasters(){
-    if(boolCancelChooseQualKlasters()){
+    if(boolCancelChooseQualKlasters()==true){
         inputQualKlasters.remove()
-        boolChooseQualKlusters=false
+        boolChooseQualKlusters=0
         addButtonTransferChooseQualKlasters()
     }
+}
 
+function SearchKlasters(){
+    if(boolSearchKlasters()==true){
+        let k = Number(inputQualKlasters.value)
+        console.log(Points.length)
+        K_Means(k)// имеем klasters
+        colorsForKlasters(k)// имеем colors
+
+        
+        coloringKlasters()
+        drawCentroids()
+
+        addButtonComplete()
+        inputQualKlasters.remove()
+        boolChooseQualKlusters=2
+    }
+
+}
+
+function BackToChooseQualKlasters(){
+    if(boolBackToChooseQualKlasters()==true){
+        boolChooseQualKlusters=1;
+        addButtonChooseQualKlasters()
+        addBackground()
+        coloringPointsInWhite()
+    }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -304,12 +378,10 @@ function CancelChooseQualKlasters(){
 var x = 0
 var y = 0 
 
-var boolChooseQualKlusters=false
+var boolChooseQualKlusters=0
 
-function Node(x, y) {
-    this.x = x;
-    this.y = y;
-
+function Node(x,y){
+    return {"x": x, "y": y}
 }
 var Points = []
 
@@ -319,20 +391,31 @@ var inputQualPoints;
 //поле для ввода (в выборе кол-ва кластеров стоит)
 var inputQualKlasters;
 
+var colors;// цвета для кластеров
+
+var klasters;// кластеры
+
+var centroids// центры кластеров
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+function coloringPointsInWhite(){
+    for(let i=0;i<Points.length;i++){
+        paintPoint(Points[i].x,Points[i].y)
+    }
+}
 
 // костыль для закрытия canvas
 function CloseKlasters(){
     inputQualPoints.remove()
+    inputQualKlasters.remove()
 }
 
 //проверка ввода(должно быть число)
-function checkInput(){
-    let value = inputQualPoints.value
+function checkInput(value){
     let f = true
     
+    if(value=="") return false
+
     for(let i=0;i<value.length;i++){
         if((!(value[i]=="0" ||value[i]=="1" ||value[i]=="2" ||
                     value[i]=="3" ||value[i]=="4" ||value[i]=="5" ||
@@ -345,7 +428,121 @@ function checkInput(){
     return f
 } 
 
+// проверка value:  0 < value <= кол-ва точек
+function checkInputQualKlaters(value){
+    let f = checkInput(value)
+
+    if(f==true){
+        if(value.length==0 && value<=0 && value>Points.length){
+            f=false
+        }
+    }
+
+    return f
+}
+
+// квадрат расстояния между точками а и б
+function distance(a, b) {
+    let x = Math.pow(a.x - b.x, 2)
+    let y = Math.pow(a.y - b.y, 2)
+    return x + y
+}
+
+function drawCentroids(){
+    for(let i=0;i<centroids.length;i++){
+        pole.beginPath()
+        pole.fillStyle = "white"
+        pole.arc(centroids[i].x, centroids[i].y, 8, 0, 2 * Math.PI)
+        pole.fill();
+    }
+}
+
+// рандом int от 0 до max
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+function coloringKlasters() {
+    for(let i=0;i<klasters.length;i++){
+        for(let j=0;j<klasters[i].length;j++){
+            paintPoint(klasters[i][j].x,klasters[i][j].y,colors[i])
+        }
+    }
+}
+
+function getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color1 = '#';
+    for (var i = 0; i < 6; i++) {
+        color1 += letters[Math.floor(Math.random() * 16)];
+    }
+    return color1;
+}
+
+function colorsForKlasters(k){
+    colors = []
+    for(let i = 0;i<k;i++){
+        colors[i]=getRandomColor()
+    }
+}
+
+function K_Means(k) {
+    //объявляем центры
+    centroids = []
+    for (let i = 0; i < k; i++) {
+        centroids[i] = Node(getRandomInt(rightLowerX-leftTopX-4)+leftTopX+2,getRandomInt(rightLowerY-leftTopY-4)+leftTopY+2)
+    }
+    
+    let WCSS =-1; //текущее отклонение
+
+    while(true){ //крутим пока разница между отклонениями не станет меньше 10
+        let newWCSS=0
+        let dist = 0
+
+        // объявляем/переобъявляем кластеры
+
+        klasters = Array(centroids.length)
+        for (let i = 0; i < klasters.length; i++) {
+            klasters[i] = []
+        }
+        
+        // раскидываем точки по кластерам
+        for (let i = 0; i < Points.length; i++) {
+            let ind = 0
+            let minDist = 999999
+    
+            // определяем в какой кластер кинуть
+            for (let j = 0; j < centroids.length; j++) {
+                dist = distance(Points[i], centroids[j])
+    
+                if (minDist > dist) {
+                    minDist = dist
+                    ind = j
+                }
+            }
+            // считаем отклонение и кидаем в кластер
+            newWCSS+=distance(Points[i],centroids[ind])
+            klasters[ind][klasters[ind].length] = Points[i]
+        }
+        
+        if(Math.abs(WCSS-newWCSS)<1){ // break while
+            break
+        }
+
+        // обновляем текущее отклонение
+        WCSS = newWCSS
+        // переопределяем центры
+        for (let i = 0; i < klasters.length; i++) {
+            let sumX = 0, sumY = 0, count = 0
+            for (let j = 0; j < klasters[i].length; j++) {
+                sumX += klasters[i][j].x
+                sumY += klasters[i][j].y
+                count++
+            }
+            if(count!=0)
+                centroids[i] = Node(Math.floor(sumX / count)+1,Math.floor(sumY / count)+1)
+            else
+                centroids[i] = Node(getRandomInt(rightLowerX-leftTopX-4)+leftTopX+2,getRandomInt(rightLowerY-leftTopY-4)+leftTopY+2)
+        }
+    }
+}

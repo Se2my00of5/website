@@ -2,21 +2,21 @@ games[1].onclick = () => {
     if (flag == 0) {
         flag = 2
         canvas.style.opacity = "1";
-        
+
         addGameName()
-        
+
         addBackground()
-        
+
         addButtonReset()
-        
+
         addButtonRandom()
-        
+
         addButtonTransferChooseQualKlasters()
     }
 }
 
 
-canvas.addEventListener("click", function(event) {
+canvas.addEventListener("click", function (event) {
     if (flag == 2) {
         x = event.offsetX;
         y = event.offsetY;
@@ -30,11 +30,20 @@ canvas.addEventListener("click", function(event) {
         //нарандомить точек
         narandomiti()
 
+        //возврат к выбору кол-ва кластеров
+        BackToChooseQualKlasters()
+        
+        //поиск кластеров
+        SearchKlasters()
+
         //начало кластеризации
         transferToChooseQualKlasters()
-            
+
         //отмена выбора кол-ва кластеров
         CancelChooseQualKlasters()
+
+        
+
+
     }
 })
-
