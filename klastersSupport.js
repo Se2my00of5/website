@@ -317,6 +317,10 @@ function resetGame() {
         boolChooseQualKlusters = 0
         inputQualPoints.remove()
         inputQualKlasters.remove()
+        pole.beginPath()
+        pole.clearRect(button_Complete_LeftTopX-2,button_Complete_LeftTopY-2,
+            button_Complete_RightLowerX-button_Complete_LeftTopX+4,
+            button_Complete_RightLowerY-button_Complete_LeftTopY+4)
         addBackground()
         addButtonTransferChooseQualKlasters()
         addButtonRandom()
@@ -432,7 +436,7 @@ function checkInputQualKlaters(value) {
     let f = checkInput(value)
 
     if (f == true) {
-        if (value.length == 0 && value <= 0 && value > Points.length) {
+        if (value.length == 0 || value <= 0 || value > Points.length) {
             f = false
         }
     }
@@ -524,12 +528,8 @@ function K_Means(k) {
             klasters[ind][klasters[ind].length] = Points[i]
         }
 
-        if (Math.abs(WCSS - newWCSS) < 1) { // break while
-            break
-        }
-
-        // обновляем текущее отклонение
-        WCSS = newWCSS
+        let newCentroids = []
+        let boolQualKlasters=true
         // переопределяем центры
         for (let i = 0; i < klasters.length; i++) {
             let sumX = 0, sumY = 0, count = 0
@@ -539,9 +539,20 @@ function K_Means(k) {
                 count++
             }
             if (count != 0)
-                centroids[i] = Node(Math.floor(sumX / count) + 1, Math.floor(sumY / count) + 1)
-            else
-                centroids[i] = Node(getRandomInt(rightLowerX - leftTopX - 4) + leftTopX + 2, getRandomInt(rightLowerY - leftTopY - 4) + leftTopY + 2)
+                newCentroids[i] = Node(Math.floor(sumX / count) + 1, Math.floor(sumY / count) + 1)
+            else{
+                boolQualKlasters=false
+                newCentroids[i] = Node(getRandomInt(rightLowerX - leftTopX - 4) + leftTopX + 2, getRandomInt(rightLowerY - leftTopY - 4) + leftTopY + 2)
+            }
+                
         }
+
+        if (Math.abs(WCSS - newWCSS) < 1 && boolQualKlasters==true) { // break while
+            break
+        }
+
+        // обновляем текущее отклонение и центры
+        centroids = newCentroids
+        WCSS = newWCSS
     }
 }
