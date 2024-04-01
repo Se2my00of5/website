@@ -1,9 +1,9 @@
-const themeButton = document.querySelector("#themeButton")
 const display = document.body
 
-const canvas = document.querySelector("#myCanvas")
-const pole = canvas.getContext("2d")
+var canvas = document.querySelector("#myCanvas")
+var pole = canvas.getContext("2d")
 
+const themeButton = document.querySelector("#themeButton")
 themeButton.onclick = () => { //обработка смены темы по нажатию
     if (themeButton.src.indexOf("sun") != -1) {
         // перевод на тёмную тему 
@@ -22,35 +22,24 @@ themeButton.onclick = () => { //обработка смены темы по на
     }
 };
 
+function resizeCanvas() {
+    canvas.width = display.offsetWidth - canvas.offsetLeft - 50
+    canvas.height = display.offsetHeight - canvas.offsetTop - 100
+}
 
+/*  добавляйте в свои проги
 
-//квадратик
-pole.beginPath();
-pole.rect(canvas.width - 40, 10, 30, 30)
-pole.strokeStyle = "black"
-pole.fillStyle = "white"
-pole.stroke()
-pole.fill()
+window.addEventListener('resize', function(){
+    resizeCanvas()
+    playCanvas()
+    if(flag == n){
+        play...() 
+    }
+});
+*/
 
-//крестик
-pole.beginPath();
-pole.strokeStyle = "red"
-pole.lineWidth = "3"
-pole.lineCap = "round"
-pole.moveTo(canvas.width - 35, 15)
-pole.lineTo(canvas.width - 15, 35)
-pole.moveTo(canvas.width - 15, 15)
-pole.lineTo(canvas.width - 35, 35)
-pole.stroke()
-
-//ограничительная линия, всё что выше(+ 1-2px) не стирать
-//можно название там писать
-pole.beginPath();
-pole.strokeStyle = "black"
-pole.lineWidth = "2.3"
-pole.moveTo(0, 50)
-pole.lineTo(canvas.width, 50)
-pole.stroke()
+resizeCanvas()
+playCanvas()
 
 // закрытие canvas
 var flag = false; // 0 - неактив, 1-6 - запущена игрулька
@@ -101,4 +90,34 @@ games[5].onclick = () => {
         flag = 6
         canvas.style.opacity = "1";
     }
+}
+
+function playCanvas(){
+    //квадратик
+    pole.beginPath();
+    pole.rect(canvas.width - 40, 10, 30, 30)
+    pole.strokeStyle = "black"
+    pole.fillStyle = "white"
+    pole.stroke()
+    pole.fill()
+
+    //крестик
+    pole.beginPath();
+    pole.strokeStyle = "red"
+    pole.lineWidth = "3"
+    pole.lineCap = "round"
+    pole.moveTo(canvas.width - 35, 15)
+    pole.lineTo(canvas.width - 15, 35)
+    pole.moveTo(canvas.width - 15, 15)
+    pole.lineTo(canvas.width - 35, 35)
+    pole.stroke()
+
+    //ограничительная линия
+    //можно название там писать
+    pole.beginPath();
+    pole.strokeStyle = "black"
+    pole.lineWidth = "2.3"
+    pole.moveTo(0, 50)
+    pole.lineTo(canvas.width, 50)
+    pole.stroke()
 }
