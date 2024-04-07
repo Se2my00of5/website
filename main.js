@@ -22,6 +22,10 @@ themeButton.onclick = () => { //обработка смены темы по на
     }
 };
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 function resizeCanvas() {
     canvas.width = display.offsetWidth - canvas.offsetLeft - 50
     canvas.height = display.offsetHeight - canvas.offsetTop - 100
@@ -48,7 +52,7 @@ canvas.addEventListener("mouseup", function (event) {
     let y = event.offsetY;
 
     if (x >= canvas.width - 40 && x <= canvas.width - 10 && y >= 10 && y <= 40) {
-        if(flag==2) CloseKlasters()//костыль для закрытия игры-кластеров
+        if(flag==2) CloseInputs()//костыль для закрытия игры-кластеров
         
         canvas.style.opacity = "0";
         pole.clearRect(0, 51, canvas.width, canvas.height);
