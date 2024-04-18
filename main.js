@@ -65,12 +65,6 @@ games[2].onclick = () => {
         canvas.style.opacity = "1";
     }
 }
-games[3].onclick = () => {
-    if (flag == 0) {
-        flag = 4
-        canvas.style.opacity = "1";
-    }
-}
 games[4].onclick = () => {
     if (flag == 0) {
         flag = 5
