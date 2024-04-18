@@ -4,7 +4,7 @@ games[1].onclick = () => {
         canvas.style.opacity = "1"
 
         updateCords()
-        addButtons()
+        addButtonsKlaster()
     }
 }
 
@@ -13,17 +13,17 @@ window.addEventListener('resize', function(){
     playCanvas()
     if(flag==2){
         updateCords()
-        addButtons()
+        addButtonsKlaster()
     } 
 });
 
-var used // костыль ... не позволяет срабатывать двум кнопкам одновренно( которые наложены дург на друга)
+var used2 // костыль ... не позволяет срабатывать двум кнопкам одновренно( которые наложены дург на друга)
 canvas.addEventListener("mouseup", function (event) {
     
     if (flag == 2) {
         x = event.offsetX;
         y = event.offsetY;
-        used = false
+        used2 = false
 
         //очистка поля
         resetGame()

@@ -1,10 +1,10 @@
 //отрисовка объектов
-function addButtons() {
+function addButtonsKlaster() {
     addGameName()
 
     addBackground()
 
-    CloseInputs()
+    CloseInputsKlasters()
 
     addButtonReset()
 
@@ -188,7 +188,7 @@ function addGameName() {
     pole.font = "30px Trattatello, fantasy"
     pole.fillStyle = "#3F172C"
 
-    pole.fillText("Кластеризация (обычка)", 20, 35)
+    pole.fillText("Кластеризация", 20, 35)
 }
 
 function addBackground() {
@@ -567,22 +567,22 @@ function addPoint() {
 }
 
 function transferToChooseQualKlasters() {
-    if (boolStartKlasterization() == true && used == false) {
+    if (boolStartKlasterization() == true && used2 == false) {
         boolChooseQualKlusters = 1
         addButtonChooseQualKlasters()
 
-        used = true
+        used2 = true
 
     }
 }
 
 function CancelChooseQualKlasters() {
-    if (boolCancelChooseQualKlasters() == true && used == false) {
+    if (boolCancelChooseQualKlasters() == true && used2 == false) {
         inputQualKlasters.remove()
         addButtonTransferChooseQualKlasters()
         boolChooseQualKlusters = 0
 
-        used = true
+        used2 = true
     }
 }
 
@@ -696,8 +696,7 @@ function deleteNaloshPoints(d = 16) {
 
 // главные переменные/структура
 
-var x = 0
-var y = 0
+
 
 var r = 8
 
@@ -720,10 +719,10 @@ function color(r, g, b) {
     return { "r": r, "g": g, "b": b }
 }
 // поле для ввода (в рандоме стоит)
-var inputQualPoints;
+let inputQualPoints;
 
 //поле для ввода (в выборе кол-ва кластеров стоит)
-var inputQualKlasters;
+let inputQualKlasters;
 
 var colors_K_Means;// цвета для кластеров
 var klasters_K_Means;// кластеры
@@ -761,7 +760,7 @@ function coloringPoints(color = "white") {
 }
 
 // костыль для закрытия canvas
-function CloseInputs() {
+function CloseInputsKlasters() {
 
     try {
         inputQualPoints.remove()
