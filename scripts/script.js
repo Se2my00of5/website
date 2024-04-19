@@ -1,6 +1,7 @@
 
-document.addEventListener("DOMContentLoaded", function() {
 
+document.addEventListener("DOMContentLoaded", function() {
+    
     var ant = this.querySelector("#ant");
     ant.addEventListener("click", function(){
         window.location = 'ant/ant.html';
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var astar = this.querySelector("#astar");
     astar.addEventListener("click", function(){
+        
         window.location = 'astar/astar.html';
     })
 

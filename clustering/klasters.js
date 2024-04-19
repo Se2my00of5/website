@@ -1,26 +1,23 @@
-games[1].onclick = () => {
-    if (flag == 0) {
-        flag = 2
-        canvas.style.opacity = "1"
+
+canvas.style.opacity = "1"
 
         
-        addButtonsKlaster()
-    }
-}
+addButtonsKlaster()
+    
+
 
 window.addEventListener('resize', function(){
     
-    if(flag==2){
-        resizeCanvas()
-        playCanvas()
-        addButtonsKlaster()
-    } 
+    
+    resizeCanvas()
+    playCanvas()
+    addButtonsKlaster()
+    
 });
 
 var used2 // костыль ... не позволяет срабатывать двум кнопкам одновренно( которые наложены дург на друга)
 canvas.addEventListener("mouseup", function (event) {
     
-    if (flag == 2) {
         x = event.offsetX;
         y = event.offsetY;
         used2 = false
@@ -51,6 +48,6 @@ canvas.addEventListener("mouseup", function (event) {
         activate_Ostov()
         coloringKlasters()
 
-    }
+    
 })
 

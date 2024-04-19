@@ -9,11 +9,38 @@ function addButtonsAnts() {
 
 }
 
+function background() {
+    let x0 = 15
+    let x1 = canvas.width - 180
+    let y0 = 65
+    let y1 = canvas.height - 15
+    return {
+        "x0": x0,
+        "y0": y0,
+        "x1": x1,
+        "y1": y1,
+        "lenX": x1 - x0,
+        "lenY": y1 - y0
+    }
+}
 
+function addBackground() {
+    let cords = background()
+    pole.beginPath()
+    const gradient = pole.createLinearGradient(cords.x0, cords.y0, cords.x1, cords.y0);
+
+    gradient.addColorStop(0, "#0A083A");
+    gradient.addColorStop(0.08, "black");
+    gradient.addColorStop(0.92, "black");
+    gradient.addColorStop(1, "#0A083A");
+    pole.fillStyle = gradient
+
+    pole.fillRect(cords.x0, cords.y0, cords.lenX, cords.lenY);
+}
 function addGameNameAnts() {
     pole.beginPath()
     pole.font = "30px Trattatello, fantasy"
-    pole.fillStyle = "#3F172C"
+    pole.fillStyle = "#000000"
 
     pole.fillText("Муравьиный алгоритм", 20, 35)
 
@@ -39,13 +66,13 @@ function addButtonGetPath() {
     let cords = buttonGetPath()
     pole.beginPath()
     pole.rect(cords.x0, cords.y0, cords.lenX, cords.lenY);
-    pole.fillStyle = "white"
+    pole.fillStyle = "green"
     pole.strokeStyle = "black"
 
     pole.fill();
     pole.stroke();
 
-    pole.fillStyle = "#3F172C"
+    pole.fillStyle = "#000000"
     pole.font = "23px Trattatello, fantasy"
     pole.fillText("Получить путь", cords.x0 + 4, cords.y0 + 40)
     

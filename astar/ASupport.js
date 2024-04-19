@@ -13,7 +13,7 @@ function addButtonsA() {
 function addGameNameA() {
     pole.beginPath()
     pole.font = "30px Trattatello, fantasy"
-    pole.fillStyle = "#3F172C"
+    pole.fillStyle = "#000000"
 
     pole.fillText("А*", 20, 35)
 }
@@ -55,9 +55,9 @@ function addButtonSizeField() {
     pole.fillRect(cords.x0 + 101, cords.y0 + 26,
         48, 38)
 
-    pole.fillStyle = "#3F172C"
+    pole.fillStyle = "#000000"
     pole.font = "23px Trattatello, fantasy"
-    pole.fillText("размер карты", cords.x0 + 4, cords.y0 + 20)
+    pole.fillText("Размер карты", cords.x0 + 4, cords.y0 + 20)
 
     inputSizeField = document.createElement('input')
     inputSizeField.type = 'text';
@@ -71,6 +71,22 @@ function addButtonSizeField() {
     inputSizeField.style.top = top;
 
     document.body.appendChild(inputSizeField);
+}
+
+function checkInput(value) {
+    let f = true
+
+    if (value == "") return false
+
+    for (let i = 0; i < value.length; i++) {
+        if ((!(value[i] == "0" || value[i] == "1" || value[i] == "2" ||
+            value[i] == "3" || value[i] == "4" || value[i] == "5" ||
+            value[i] == "6" || value[i] == "7" || value[i] == "8" || value[i] == "9"))) {
+            f = false;
+        }
+    }
+
+    return f
 }
 
 let side
@@ -347,7 +363,7 @@ function addButtonFindWay() {
     pole.fill();
     pole.stroke();
 
-    pole.fillStyle = "#3F172C"
+    pole.fillStyle = "#000000"
     pole.font = "35px Trattatello, fantasy"
     pole.fillText("Поиск", cords.x0 + 25, cords.y0 + 38)
 
@@ -386,9 +402,9 @@ function addButtonComp() {
     pole.fill();
     pole.stroke();
 
-    pole.fillStyle = "#3F172C"
+    pole.fillStyle = "#000000"
     pole.font = "35px Trattatello, fantasy"
-    pole.fillText("_готово_", cords.x0 + 6, cords.y0 + 29)
+    pole.fillText("   Готово", cords.x0 + 6, cords.y0 + 29)
     pole.font = "25px Trattatello, fantasy"
     pole.fillText("назад", cords.x0 + 38, cords.y0 + 67)
 }
