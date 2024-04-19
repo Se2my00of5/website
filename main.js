@@ -22,33 +22,34 @@ themeButton.onclick = () => { //обработка смены темы по на
     }
 };
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 function resizeCanvas() {
     canvas.width = display.offsetWidth - canvas.offsetLeft - 50
     canvas.height = display.offsetHeight - canvas.offsetTop - 100
 }
 
-/*  добавляйте в свои проги
 
-window.addEventListener('resize', function(){
-    resizeCanvas()
-    playCanvas()
-    if(flag == n){
-        play...() 
-    }
-});
-*/
 
 resizeCanvas()
 playCanvas()
 
+
+var x,y
 // закрытие canvas
 var flag = false; // 0 - неактив, 1-6 - запущена игрулька
+
 canvas.addEventListener("mouseup", function (event) {
-    let x = event.offsetX;
-    let y = event.offsetY;
+    x = event.offsetX;
+    y = event.offsetY;
 
     if (x >= canvas.width - 40 && x <= canvas.width - 10 && y >= 10 && y <= 40) {
-        if(flag==2) CloseKlasters()//костыль для закрытия игры-кластеров
+        if(flag==2) CloseInputsKlasters()//костыль для закрытия игры-кластеров
+        if(flag==1) CloseInputsA()
+
+        clearTimeOutsId()
         
         canvas.style.opacity = "0";
         pole.clearRect(0, 51, canvas.width, canvas.height);
@@ -57,25 +58,20 @@ canvas.addEventListener("mouseup", function (event) {
     }
 })
 
+var timeouts = []
+function clearTimeOutsId(){
+    for(let i=0;i<timeouts.length;i++){
+        clearTimeout(timeouts[i]);
+    }
+}
+
 
 const games = document.querySelectorAll("li")
 
 
-games[0].onclick = () => {
-    if (flag == 0) {
-        flag = 1
-        canvas.style.opacity = "1";
-    }
-}
 games[2].onclick = () => {
     if (flag == 0) {
         flag = 3
-        canvas.style.opacity = "1";
-    }
-}
-games[3].onclick = () => {
-    if (flag == 0) {
-        flag = 4
         canvas.style.opacity = "1";
     }
 }

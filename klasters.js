@@ -1,25 +1,29 @@
 games[1].onclick = () => {
     if (flag == 0) {
         flag = 2
-        canvas.style.opacity = "1";
+        canvas.style.opacity = "1"
 
-        addGameName()
-
-        addBackground()
-
-        addButtonReset()
-
-        addButtonRandom()
-
-        addButtonTransferChooseQualKlasters()
+        
+        addButtonsKlaster()
     }
 }
 
+window.addEventListener('resize', function(){
+    
+    if(flag==2){
+        resizeCanvas()
+        playCanvas()
+        addButtonsKlaster()
+    } 
+});
 
-canvas.addEventListener("click", function (event) {
+var used2 // костыль ... не позволяет срабатывать двум кнопкам одновренно( которые наложены дург на друга)
+canvas.addEventListener("mouseup", function (event) {
+    
     if (flag == 2) {
         x = event.offsetX;
         y = event.offsetY;
+        used2 = false
 
         //очистка поля
         resetGame()
@@ -32,18 +36,21 @@ canvas.addEventListener("click", function (event) {
 
         //возврат к выбору кол-ва кластеров
         BackToChooseQualKlasters()
-        
+
         //поиск кластеров
         SearchKlasters()
-
-        //начало кластеризации
-        transferToChooseQualKlasters()
 
         //отмена выбора кол-ва кластеров
         CancelChooseQualKlasters()
 
-        
+        //начало кластеризации
+        transferToChooseQualKlasters()
 
+        activate_K_Means()
+        activate_C_Means()
+        activate_Ostov()
+        coloringKlasters()
 
     }
 })
+
