@@ -1,11 +1,11 @@
 function addButtonsA() {
     CloseInputsA()
-    addGameName()
+    addGameNameA()
     addButtonSizeField()
 
 }
 
-function addGameName() {
+function addGameNameA() {
     pole.beginPath()
     pole.font = "30px Trattatello, fantasy"
     pole.fillStyle = "#3F172C"
@@ -461,22 +461,6 @@ function CloseInputsA() {
 
 }
 
-//проверка ввода(должно быть число)
-function checkInput(value) {
-    let f = true
-
-    if (value == "") return false
-
-    for (let i = 0; i < value.length; i++) {
-        if ((!(value[i] == "0" || value[i] == "1" || value[i] == "2" ||
-            value[i] == "3" || value[i] == "4" || value[i] == "5" ||
-            value[i] == "6" || value[i] == "7" || value[i] == "8" || value[i] == "9"))) {
-            f = false;
-        }
-    }
-
-    return f
-}
 
 
 

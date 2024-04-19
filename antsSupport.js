@@ -7,7 +7,6 @@ function addButtonsAnts() {
 
     addButtonReset()
 
-    buttonReset()
 }
 
 

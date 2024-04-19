@@ -10,22 +10,21 @@ games[3].onclick = () => {
 }
 
 window.addEventListener('resize', function(){
-    resizeCanvas()
-    playCanvas()
+    
     if(flag==4){
+        resizeCanvas()
+        playCanvas()
         addButtonsAnts()
 
     } 
 });
 
-var used4
+
 canvas.addEventListener("mouseup", function (event) {
     
     if (flag == 4) {
         x = event.offsetX;
         y = event.offsetY;
-        
-        used4 = false
 
         addpoint()
 

@@ -1,6 +1,6 @@
 //отрисовка объектов
 function addButtonsKlaster() {
-    addGameName()
+    addGameNameKlasters()
 
     addBackground()
 
@@ -183,7 +183,7 @@ function paintPointHalf(x, y, color = "white") {
     pole.fill();
 }
 
-function addGameName() {
+function addGameNameKlasters() {
     pole.beginPath()
     pole.font = "30px Trattatello, fantasy"
     pole.fillStyle = "#3F172C"

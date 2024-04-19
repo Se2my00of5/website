@@ -9,9 +9,10 @@ games[0].onclick = () => {
 }
 
 window.addEventListener('resize', function(){
-    resizeCanvas()
-    playCanvas()
+    
     if(flag==1){
+        resizeCanvas()
+        playCanvas()
         addButtonsA()
     } 
 });

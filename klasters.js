@@ -3,16 +3,16 @@ games[1].onclick = () => {
         flag = 2
         canvas.style.opacity = "1"
 
-        updateCords()
+        
         addButtonsKlaster()
     }
 }
 
 window.addEventListener('resize', function(){
-    resizeCanvas()
-    playCanvas()
+    
     if(flag==2){
-        updateCords()
+        resizeCanvas()
+        playCanvas()
         addButtonsKlaster()
     } 
 });
