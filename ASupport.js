@@ -2,7 +2,12 @@ function addButtonsA() {
     CloseInputsA()
     addGameNameA()
     addButtonSizeField()
-
+    field = []
+    active = false
+    cordsStart = 0
+    cordsEnd = 0
+    choicenSell = 0
+    found = 0
 }
 
 function addGameNameA() {
@@ -425,19 +430,21 @@ function backToFindWay() {
 function findAndPaintWay() {
     let graph = new Graph(n, field)
     let way = graph.findWay(cordsStart[0], cordsStart[1], cordsEnd[0], cordsEnd[1])
-    console.dir(way)
+    //console.dir(way)
+    
     for (let i = 0; i < way.length; i++) {
-        pole.beginPath()
-        pole.fillStyle = 'blue'
-        pole.arc(20 + way[i].x * side + side / 2, 70 + way[i].y * side + side / 2, side / 9, 0, 2 * Math.PI)
+        timeouts.push(setTimeout(drawOneStep,400*(i+1),way[i]))
         
-        pole.fill()
     }
-
-
 }
 
-
+function drawOneStep(cord){
+    pole.beginPath()
+    pole.fillStyle = 'blue'
+    pole.arc(20 + cord.x * side + side / 2, 70 + cord.y * side + side / 2, side / 9, 0, 2 * Math.PI)
+    
+    pole.fill()
+}
 
 
 

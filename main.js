@@ -40,6 +40,7 @@ playCanvas()
 var x,y
 // закрытие canvas
 var flag = false; // 0 - неактив, 1-6 - запущена игрулька
+
 canvas.addEventListener("mouseup", function (event) {
     x = event.offsetX;
     y = event.offsetY;
@@ -47,6 +48,8 @@ canvas.addEventListener("mouseup", function (event) {
     if (x >= canvas.width - 40 && x <= canvas.width - 10 && y >= 10 && y <= 40) {
         if(flag==2) CloseInputsKlasters()//костыль для закрытия игры-кластеров
         if(flag==1) CloseInputsA()
+
+        clearTimeOutsId()
         
         canvas.style.opacity = "0";
         pole.clearRect(0, 51, canvas.width, canvas.height);
@@ -54,6 +57,13 @@ canvas.addEventListener("mouseup", function (event) {
         flag = false;
     }
 })
+
+var timeouts = []
+function clearTimeOutsId(){
+    for(let i=0;i<timeouts.length;i++){
+        clearTimeout(timeouts[i]);
+    }
+}
 
 
 const games = document.querySelectorAll("li")
