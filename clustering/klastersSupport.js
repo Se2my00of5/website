@@ -272,8 +272,8 @@ function addButtonRandom() {
     inputQualPoints.style.width = "90px";
     inputQualPoints.style.height = "32px"
 
-    let left = (280 + canvas.width - 162) + "px"
-    let top = (130 + 118) + "px"
+    let left = (280 + canvas.width - 164) + "px"
+    let top = (130 + 116) + "px"
     inputQualPoints.style.left = left;
     inputQualPoints.style.top = top;
 
@@ -328,8 +328,8 @@ function addButtonChooseQualKlasters() {
     inputQualKlasters.style.width = "51px";
     inputQualKlasters.style.height = "24px"
 
-    let left = (280 + canvas.width - 117) + "px"
-    let top = (130 + 201) + "px"
+    let left = (280 + canvas.width - 120) + "px"
+    let top = (130 + 199) + "px"
     inputQualKlasters.style.left = left;
     inputQualKlasters.style.top = top;
 

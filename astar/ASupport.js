@@ -65,8 +65,8 @@ function addButtonSizeField() {
     inputSizeField.style.width = "90px";
     inputSizeField.style.height = "32px"
 
-    let left = (280 + canvas.width - 162) + "px"
-    let top = (130 + 118) + "px"
+    let left = (280 + canvas.width - 164) + "px"
+    let top = (130 + 116) + "px"
     inputSizeField.style.left = left;
     inputSizeField.style.top = top;
 
